@@ -1,0 +1,235 @@
+* {
+    box-sizing: border-box;
+  }
+
+
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    min-height: 100vh;
+    width: 100%;
+  }
+  
+  /* Style the header */
+  header, h2 {
+    background-color: grey;
+    padding-top: 2em;
+    text-align: center;
+    font-size: 35px;
+    color: white;
+  }
+  
+  /* Container for flexboxes */
+  section {
+    display: -webkit-flex;
+    display: flex;
+    align-items: stretch;
+   /* position: static; */
+  }
+  
+  /* Style the navigation menu side nav */
+  nav {
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    background: #ccc;
+    padding: 20px;
+  }
+  
+  /* Style the list inside the menu */
+  nav ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  /* Style the content */
+  article {
+    -webkit-flex: 3;
+    -ms-flex: 3;
+    flex: 3;
+    background-color: #f1f1f1;
+    padding: 10px;
+    min-height: 400px;
+  }
+  
+  /* Style the footer */
+
+.footer{
+  display: flex;
+  background-color: #777;
+  padding: 10px; 
+ text-align: center;
+ color: white;
+}
+
+  
+  /* Responsive layout - makes the menu and the content (inside the section) sit on top of each other instead of next to each other */
+  @media (max-width: 600px) {
+    section {
+      -webkit-flex-direction: column;
+      flex-direction: column;
+    }
+  }
+  
+  /* begin navbar boevn */
+  #navigatiebalkboven {
+  background-color: lightgrey;
+  /* deze haalt de bullets weg */
+  
+  list-style-type: none;
+  /* deze zet de li items recht naast elkaar */
+  
+  /* deze linke maakt de navubar horizontal    */
+  
+  margin: 0px;
+  padding: 0px;
+  font-size: 20px;
+  overflow: hidden;
+  }
+  
+  #navigatiebalkboven ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;   
+    /* background-color: #333333; */
+  }
+  
+  #navigatiebalkboven li {
+   /* deze maakt de regels naast elkaar van de navbalk */
+    float: left;
+  }
+  
+  #navigatiebalkboven li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 16px;
+    text-decoration: none;
+  }
+  
+  #navigatiebalkboven li a:hover {
+    background-color: #111111;
+  }
+
+  #navigatiebalkboven li a:active  {
+    color: white;
+  }
+
+/* sticky navbar styles/ function*/
+  .sticky{
+    /* door deze blijft de nav bar plakken aan het scherm zelf als je scrolled*/
+    position: fixed;
+    top: 0; 
+    width: 100%;
+  }
+
+/* end sticky navbar*/
+
+
+/* einde navbar boven */
+  
+  .ftable table {
+     width: 100%;
+     font-size: 20px;
+     border-width:4px;
+  }
+  
+  .ftable, tr,td {
+   border: 3px solid palevioletred;
+    border-collapse: collapse;
+    border-radius: 5px;
+  }
+  
+  .ftable tr:nth-child(1) {
+   background-color: blue;
+   font-weight: bold;
+  }
+  
+  /* begin about.php */
+  .forminput{
+   border: 2px solid white;
+   width: 50%;
+
+   background-color: grey;
+   font-size: 16px;
+   border: 2px solid black;   
+  }
+  /* einde about.php */
+
+  
+  /*skill bar open*/
+  .skillbackdrop {
+    width: 100%;
+    background-color: #ddd;
+  }
+  
+  .skills {
+    text-align: right;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: white;
+  }
+  
+  .html {width: 60%; background-color: #EA2027;}
+  .css {width: 20%; background-color: #EE5A24;}
+  .js {width: 10%; background-color: #FFC312;}
+  .php {width: 50%; background-color: #4cd137;}
+  .nl {width: 60%; background-color: #00a8ff;}
+  .pm {width: 70%; background-color: #192a56;}
+  .p {width: 80%; background-color: #8c7ae6;}
+  .ict {width: 60%; background-color: #22a6b3;}
+  /*skill bar close*/
+  
+  .comment, .talen{
+    height: 50px;
+  }
+.assignmentbutton{
+    background-color: grey;
+    font-size: 16px;
+    border: 2px solid black;
+}  
+
+/* container */
+.flex-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  flex-wrap: wrap;
+}
+
+.filepage  h1{
+color:  white;
+}
+.filepage{
+border: 3px solid black;
+padding: 15px;
+border-image: url(/Media/border.png) 30 round;
+/*
+background: rgb(2,0,36);
+background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(181,124,235,1) 33%, rgba(0,212,255,1) 100%);
+*/
+background: linear-gradient(blue, white);
+} 
+
+
+.dropdown-content {
+  /* door de positie te veranderen  naar fixedkomt het blokje nu wel boven de  content vlak*/
+   /*position: fixed; */
+   float: none;
+ /*position: relative; */
+  background-color:  lightgray;
+ /* min-width: 160px; */
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1; 
+}
+
+
+/* begin dropdown */
+.dropdown-content{
+  display: none;
+}
+
+.show {
+  display: block;
+}
+/* einde drop down */
