@@ -211,7 +211,7 @@ background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(181,124,235,1) 33%, r
 background: linear-gradient(blue, white);
 } 
 
-
+/* begin dropdown */
 .dropdown-content {
   /* door de positie te veranderen  naar fixedkomt het blokje nu wel boven de  content vlak*/
    /*position: fixed; */
@@ -220,13 +220,8 @@ background: linear-gradient(blue, white);
   background-color:  lightgray;
  /* min-width: 160px; */
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1; 
-}
-
-
-/* begin dropdown */
-.dropdown-content{
   display: none;
+  z-index: 1; 
 }
 
 .show {

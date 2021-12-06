@@ -10,15 +10,40 @@ $nav = [
     'About'=>'about.php',   
     'Table'=>'table.php',
     'Opdrachten'=>'opdrachten.php',
-    'Admin'=>'admin.php',         
+    'Admin'=>'admin.php',        
+];
+// echo '<div id="navigatiebalkboven">'.createList($nav, 'nav_itemsboven').'</div>';
+
+$drop = [
+  'link1'=>'#',
+  'link2'=>'#',
+  'link3'=>'#',              
 ];
 
 //$arraydropdown = array("Opdrachten"=>"opdrachten.php");
 
 // echo createList($nav, "nav_itemsboven"); //hier mee krijg ik de functie
-echo createList($nav, "nav_itemsboven");
+// echo '<div id="navigatiebalkboven">'.createList($drop, "nav_itemsboven", "dropdown-content").'</div>';
 
 //echo createNavigationBar($nav,$arraydropdown,"nav_itemsboven","on");
+$navdrop = [
+  'Home'=>'index.php',
+  'Skills'=>'skills.php',
+  'Contact'=>'contact.php',   
+  'About'=>'about.php',   
+  'Table'=>'table.php',
+  'Opdrachten'=>'opdrachten.php',
+  'Admin'=>'admin.php',
+  'dropdown'=>[
+    'link1'=>'#',
+    'link2'=>'#',
+    'link3'=>'#',
+  ]
+  ];
+  echo '<div id="navigatiebalkboven">'.createList($navdrop, "nav_itemsboven", "dropdown-content").'</div>';
+
+
+
 ?>
 
   <!-- <li><a href="index.php">Home</a></li>

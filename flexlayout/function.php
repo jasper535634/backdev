@@ -66,15 +66,45 @@
 }
 
 
-function createList($arr, $nav,)
+function createList($arr, $classmain, $classdrop="")
 {
-    $html = '<ul class="' . $nav . '">';
+    $html = '<ul class="' . $classmain . '">';
     foreach ($arr as $key => $val) {
-        $html .="<li><a href='" .$val. "'>" .$key.  "</a></li>";    
+      if(is_array($val)){
+        $html.= "<li><a href='#' onclick='dropdown()'>" .$key. "</a><ul class='dropdown-content' id='myDropdown'>";
+        foreach($val as $key => $value){
+          $html .="<li><a href='".$value."' class='dropbtn'>".$key. "</a></li>";    
+        }
+        $html.="</ul></li>";
+    }else{
+      $html .="<li><a href='".$val."'>".$key."</a></li>"; 
     }
+  }
     $html .= '</ul>';
     return $html;
 }
+// function createNavBar($array,$classmain,$classdrop=""){
+
+//   $html = '<ul class="' . $classmain . '">';
+
+//   foreach($array as $key => $val){
+//     if(is_array($val)){
+//       // als de value een array is print de naam daarvan.
+//       $html .= "<li><a href='#' class='dropbtn' onclick='dropDown()'>Dropdown</a>";
+//       $html .= '<ul class="dropdown-content" id="myDropdown">';
+//       foreach($val as $key => $value){
+//         // en daarna print de values in die array die je heb mee gegeven van de drop down
+//         $html .="<li><a href='$value'>$key</a></li>";  
+//       }
+//       $html .= "</ul>";
+//     }else{
+//       $html .="<li><a href='" .$val. "'>" .$key.  "</a></li>";   
+//     }
+//   }
+//   $html .= "</ul>";
+//   return $html;
+// }
+
 
 
 
