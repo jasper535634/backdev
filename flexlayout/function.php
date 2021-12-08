@@ -120,29 +120,6 @@ function showForm($filename = "", $erromessage = "", $inhoud = "", $uit = "")
      echo $form;
 }
 
- 
-
-
-function createOpdracht($kop,$beschrijving,$programeertaal){ 
-  echo "<h1>Opdracht Maken, Tonen en weergeven</h1>";    
-  $html  = "<form class=\"\" method=\"POST\" action=\"function.php\"  enctype=\"multipart/form-data\">";
-
-  $html .= "</label for=\"kop\">Kop.</label><br>";
-  $html .= "<input type=\"text\" name=\"kop\" value=\"$kop\" readonly ></input><br>";
-
-  $html .= "</label for=\"afbeelding\">afbeelding.</label><br>";
-  $html .= "<input type=\"file\" name=\"fileToUpload\" readonly ><br>";
-
-  $html .= "</label for=\"beschrijving\">beschrijving.</label><br>";
-  $html .= "<textarea for=\"beschrijving\" name=\"beschrijving\"  value=\"$beschrijving\" rows=\"5\" cols=\"50\" readonly ></textarea><br>";
-
-  $html .= "</label for=\"ProgrameerTalen\">Programeer Talen.</label><br>";
-  $html .= "<textarea for=\"programeertaal\" name=\"programeertaal\" value=\"$programeertaal\" rows=\"5\" cols=\"50\" readonly ></textarea><br>";
-  $html .= "</form>";
-  //echo createOpdrachtForm(,$erromessage);
-  return $html;
-}
-
 function checkImage(){
     $target_dir = "uploads/";
     $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
