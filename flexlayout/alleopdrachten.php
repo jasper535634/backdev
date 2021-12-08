@@ -29,3 +29,8 @@
 <h3>Beschrijving</h3><p>"aSAs"</p>
 <h4>Programeer Talen</h4>
 <p>"aSAsaSas"</p>
+<h1>hallo en datum</h1>
+<img src="Media/maxresdefault.jpg" width="150" height="150">
+<h3>Beschrijving</h3><p>"ASSDVFBNB"</p>
+<h4>Programeer Talen</h4>
+<p>"DFXGCBVN"</p>
