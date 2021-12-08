@@ -28,7 +28,11 @@ $drop = [
 //echo createNavigationBar($nav,$arraydropdown,"nav_itemsboven","on");
 $navdrop = [
   'Home'=>'index.php',
-  'Skills'=>'skills.php',
+  'Skills'=>[
+    'Skills'=>'skills.php',
+    'link2'=>'#',
+    'link3'=>'#',
+  ],
   'Contact'=>'contact.php',   
   'About'=>'about.php',   
   'Table'=>'table.php',

@@ -1,6 +1,6 @@
 //sticky nav bar script
  //wanner de gebruiker scrollt op de page voer de myfunction uit.
-window.onscroll = function() {stickyNav()};
+function toggleSticky() {stickyNav()};
 // dit is een call back function een function, die een andere function called, dus met name wanner de functie uitgevoerd moet wworden
 // moet de call back functie uitgevoerd worden. (als er veel events plaats vinden, dan gebruik je de call back)
 
@@ -31,20 +31,27 @@ function stickyNav() {
 
 /* When the user clicks on the button, 
 toggle between hiding and showing the dropdown content */
-function dropdown() {
+function dropdown(iddrop) {
   // pak het element met de id my drop down en voeg daar acchter een toggle class show
-  document.getElementById("myDropdown").classList.toggle("show");
+  document.getElementById(iddrop).classList.toggle("show");
 }
 
 // Close the dropdown if the user clicks outside of it
-window.onclick = function(e) {
-  if (e.target.matches('.dropbtn')) {
-  var myDropdown = document.getElementById("myDropdown");
-    if (myDropdown.classList.contains('show')) {
-      myDropdown.classList.remove('show');
-    }
+function disableDropdown(e) {
+  if (!e.target.matches('.dropbtn')) {
+ // var myDropdown = document.getElementById("myDropdown");
+ const result = document.querySelectorAll("#navigatiebalkboven ul li ul");
+    //if (myDropdown.classList.contains('show')) {
+    //  myDropdown.classList.remove('show');
+   // }
+   result.forEach((result) => {
+     result.classList.remove("show");
+   });
   }
 }
+window.onclick = disableDropdown;
+
+window.onscroll = toggleSticky;
 
 
 

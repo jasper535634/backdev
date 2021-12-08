@@ -7,6 +7,8 @@
     font-family: Arial, Helvetica, sans-serif;
     min-height: 100vh;
     width: 100%;
+    margin: 0;
+    padding: 0;
   }
   
   /* Style the header */
@@ -219,12 +221,26 @@ background: linear-gradient(blue, white);
  /*position: relative; */
   background-color:  lightgray;
  /* min-width: 160px; */
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  /*box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);*/
   display: none;
   z-index: 1; 
+  position: absolute;
+  left: 0;
+  width: 100%;
+  
 }
-
+@keyframes slide {
+ from{
+   height: 0;
+ } 
+ to{
+   height: 4rem ;
+ } 
+}
 .show {
   display: block;
+  animation: slide 0.2s;
+
+  
 }
 /* einde drop down */

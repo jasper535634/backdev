@@ -71,7 +71,7 @@ function createList($arr, $classmain, $classdrop="")
     $html = '<ul class="' . $classmain . '">';
     foreach ($arr as $key => $val) {
       if(is_array($val)){
-        $html.= "<li><a href='#' onclick='dropdown()'>" .$key. "</a><ul class='dropdown-content' id='myDropdown'>";
+        $html.= "<li><a href='#' onclick=\"dropdown('".$key."');return false;\" class='dropbtn'>" .$key. "</a><ul class='dropdown-content' id=".$key.">";
         foreach($val as $key => $value){
           $html .="<li><a href='".$value."' class='dropbtn'>".$key. "</a></li>";    
         }
