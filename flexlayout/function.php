@@ -168,5 +168,7 @@ function checkImage(){
         echo "Sorry, there was an error uploading your file.";
       }
     }
-}  
+}
+
+
 ?>

@@ -44,4 +44,18 @@ function createSkillBar($skill,$level,$color){
     // 1specifieke class per bar
     //1 generieke class per bar
 }
+
+function createCard($name, $img, $diploma )
+{
+  $html= "";
+  $html .="<div class=\"card\">";
+  $html .= "<img class=\"cardimg\" src=\"./media/$img\" alt=\"Avatar\">";
+  $html .="<div class=\"cardtext\">";
+  $html .= "<h4><b>".$name."</b></h4>";
+  $html .= "<p>".$diploma."</p>";
+  $html .= "</div>";
+  $html .= "</div>";
+  return $html;
+}
+
 ?>
