@@ -89,16 +89,16 @@ function createResponsiveImages(){
         $new_image2 = scale_image(0.6, $old_image, $width, $height);
         save_image($new_image2, './media/resized0-6-'.basename($afbeelding), 'jpeg', 80);
 
-       
+       $picturename= basename($afbeelding);
         $html="";
         $html.="<picture>";
-        $html.="<source srcset=\"./media/resized0-6".basename($afbeelding). "\"media=\"(max-width: 500px)\">";
-        $html.="<source srcset=\"./media/resized0-8-".basename($afbeelding). "\"media=\"(max-width: 1000px)\">";
-        $html.="<source srcset=\"./media/".basename($afbeelding). " \"media=\"(max-width: 1500px)\">";
-        $html.= "<img src=\"./media/".basename($afbeelding).">";
+        $html.="<source srcset=\"./media/resized0-6".$picturename. "\"media=\"(max-width: 500px)\">";
+        $html.="<source srcset=\"./media/resized0-8-".$picturename. "\"media=\"(max-width: 1000px)\">";
+        $html.="<source srcset=\"./media/".$picturename. " \"media=\"(max-width: 1500px)\">";
+        $html.= "<img src=\"./media/".$picturename.">";
         $html.= "</picture>";
 
-        
+        var_dump($picturename);
         return $html;
 
       } else {
