@@ -37,6 +37,7 @@ $navdrop = [
   'About'=>'about.php',   
   'Table'=>'table.php',
   'Opdrachten'=>'opdrachten.php',
+  'images'=>'php_images.php',
   'Admin'=>'admin.php',
   'dropdown'=>[
     'link1'=>'#',
