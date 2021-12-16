@@ -62,7 +62,6 @@ function createResponsiveImages(){
     $afbeeldingmap = "media/";
     $afbeelding = $afbeeldingmap . basename($_FILES["fileToUpload"]["name"]);
     $uploadOk = 1;
-    $imageFileType = strtolower(pathinfo($afbeelding,PATHINFO_EXTENSION));
   
     //check of er een afbeelding er goed is.  
     $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
@@ -91,11 +90,12 @@ function createResponsiveImages(){
 
        $picturename= basename($afbeelding);
         $html="";
+        $html.="<br>";
         $html.="<picture>";
-        $html.="<source srcset=\"./media/resized0-6".$picturename. "\"media=\"(max-width: 500px)\">";
+        $html.="<source srcset=\"./media/resized0-6-".$picturename. "\"media=\"(max-width: 500px)\">";
         $html.="<source srcset=\"./media/resized0-8-".$picturename. "\"media=\"(max-width: 1000px)\">";
-        $html.="<source srcset=\"./media/".$picturename. " \"media=\"(max-width: 1500px)\">";
-        $html.= "<img src=\"./media/".$picturename.">";
+        //$html.="<source srcset=\"./media/".$picturename. " \"media=\"(max-width: 1500px)\">";
+        $html.= "<img src=\"./media/".$picturename."\">";
         $html.= "</picture>";
 
         var_dump($picturename);
