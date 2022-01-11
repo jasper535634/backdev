@@ -2,7 +2,6 @@
 require_once ('./model/auth.php');
 require_once ('./model/fms.php');
 require_once ('./model/display.php');
-require_once ('php_images.php');
 // hier mee start ik een sessie
  session_start();
 

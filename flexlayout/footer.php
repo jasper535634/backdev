@@ -2,7 +2,7 @@
 
   <div class="footer">
     <footer>
-      <p>Footer</p>
+      <h3>Footer</h3>
     </footer>
   </div>
 

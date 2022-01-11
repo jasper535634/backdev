@@ -1,4 +1,5 @@
 <?php
+include "php_images.php"
 // Create a 300x100 image
 $im = imagecreatetruecolor(300, 300);
 $red = imagecolorallocate($im, 0xFF, 0x00, 0x00);

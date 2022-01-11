@@ -267,3 +267,9 @@ background: linear-gradient(blue, white);
   flex-wrap: wrap;
 }
 /* close card */
+/*  open pseudo elements en class */
+p::first-letter{
+color: #111111;
+font-size: xx-large;
+}
+/*  close pseudo elements en class */
