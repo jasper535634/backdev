@@ -16,13 +16,11 @@ try {
 
   // set the resulting array to associative
   $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-var_dump($result);
-var_dump($stmt->fetchAll());
-  foreach($stmt->fetchAll() as $k =>$v){
-echo "key" . $k . "=>";
-var_dump($v);
-
-  };
+//var_dump($stmt->fetchAll());
+//   foreach($stmt->fetchAll() as $k =>$v){
+// echo "key" . $k . "=>";
+echo createTable($stmt->fetchAll(),"");
+  
 
 }catch(PDOException $e) {
     echo "Error: " . $e->getMessage();
