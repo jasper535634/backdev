@@ -273,3 +273,7 @@ color: #111111;
 font-size: xx-large;
 }
 /*  close pseudo elements en class */
+
+table, th, td {
+  border: 1px solid black;
+}

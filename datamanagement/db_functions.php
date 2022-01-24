@@ -1,5 +1,15 @@
 <?php
-function readData($sql){
+function  createData($sql, $servername, $databasename, $username, $password )
+{
+  $con = connectDB($servername, $databasename, $username, $password);
+  $stmt = $con ->prepare($sql);
+  $result = $stmt->execute();
+  $id = $con->lastInsertId();
+  return $id;
+}
+
+function readData($sql)
+{
     try {
         $conn = connectDB("localhost","myDBPDO","root","");
         var_dump($conn);
@@ -25,15 +35,17 @@ function readData($sql){
 
 
 
-
-function connectDB($servername, $dbname, $username, $password){
+function connectDB($servername, $dbname, $username, $password)
+{
 $connection = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
 $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-return $conn;
+return $connection;
 }
 
 
 
-readData("SELECT id, firstname, lastname FROM MyGuests");
+// readData("SELECT id, firstname, lastname FROM MyGuests");
+$sql = 'INSERT INTO products (product_type_code, supplier_id, product_name, product_price, other_product_details) VALUES(1,1,"Goudvis","1.50","HorseFighter")';
+echo createData($sql,"localhost","stardunk_levels","root","" );
 ?>
 
