@@ -14,6 +14,6 @@
     <label for="other_product_details">Other product details:</label><br>
     <input type="text" id="other_product_details" name="other_product_details" value=""><br><br>
 
-    <input type="submit" name="submit"value="Create">
+    <input type="submit" name="submit"value="create">
 
 </form>
