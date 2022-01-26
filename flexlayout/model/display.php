@@ -1,5 +1,5 @@
 <?php 
-function createList($arr, $classmain, $classdrop=""){
+function createLinkList($arr, $classmain, $classdrop=""){
     $html = '<ul class="' . $classmain . '">';
     foreach ($arr as $key => $val) {
       if(is_array($val)){
@@ -30,6 +30,7 @@ function createTable($entries, $ftable){
     $html.= "</table>";
     return $html;
 }
+
 // maak skill bar
 function createSkillBar($skill,$level,$color){
     //begin html

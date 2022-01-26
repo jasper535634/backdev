@@ -46,7 +46,7 @@ function handlerRequest()
     $html = "";
     $operation = isset($_GET['op']) ? $_GET['op'] : '';
 
-// eert read daarna delete en als laatst update
+    // eert read daarna delete en als laatst update
 
     switch ($operation) {
         case 'create':
@@ -57,15 +57,14 @@ function handlerRequest()
             break;
         case 'read':
             $id = $_GET['id'];
-            //echo var_dump($id);
-            $html.=createTable(readOneProduct($id),"");
+            $html .= createList(readOneProduct($id), "");
             include "partial.php";
             return $html;
             break;
         case 'update':
-            $colum= $_GET['colum'];
-            $value= $_GET['value'];
-            $id= $_GET['id'];
+            $colum = $_GET['colum'];
+            $value = $_GET['value'];
+            $id = $_GET['id'];
             $html .= "update case";
 
             updatedataOneProduct($colum, $value, $id);
@@ -73,20 +72,20 @@ function handlerRequest()
             return $html;
             break;
         case 'delete':
-            try{
-            $id = $_GET['id'];
-            deleteOneProduct($id);
-            $html .= "product deleted";
-            } catch(PDOException $e) {
-                echo "somting went wrong error:". "<br>" . $e->getMessage();
-              }
+            try {
+                $id = $_GET['id'];
+                deleteOneProduct($id);
+                $html .= "product deleted";
+            } catch (PDOException $e) {
+                echo "somting went wrong error:" . "<br>" . $e->getMessage();
+            }
             include "partial.php";
             return $html;
             break;
 
         default:
             $html .= "readAllproducts";
-            $html .= createTable(readAllProducts(),"");
+            $html .= createTable(readAllProducts(), "");
             include "partial.php";
             return $html;
             break;
@@ -136,15 +135,16 @@ function readData($sql, $servername, $databasename, $username, $password)
     $con = null;
     return $result;
 }
-function updateData($sql, $servername, $databasename, $username, $password){
+function updateData($sql, $servername, $databasename, $username, $password)
+{
     $con = connectDB("$servername", "$databasename", "$username", "$password");
     $stmt = $con->prepare($sql);
     $stmt->execute();
     $con = null;
-
 }
 
-function deleteData($sql, $servername, $databasename, $username, $password){
+function deleteData($sql, $servername, $databasename, $username, $password)
+{
     $con = connectDB("$servername", "$databasename", "$username", "$password");
 
     $con->exec($sql);
@@ -152,28 +152,32 @@ function deleteData($sql, $servername, $databasename, $username, $password){
     $con = null;
 }
 
-function readAllProducts(){
-    $sql="SELECT * FROM products";
-    $result = readData($sql,"localhost","stardunk_levels","root","");
+function readAllProducts()
+{
+    $sql = "SELECT * FROM products";
+    $result = readData($sql, "localhost", "stardunk_levels", "root", "");
     return $result;
 }
 
-function readOneProduct($id){
-    $sql="SELECT * FROM products WHERE product_id=$id";
-    $result = readData($sql,"localhost","stardunk_levels","root","");
-    return $result;    
+function readOneProduct($id)
+{
+    $sql = "SELECT * FROM products WHERE product_id=$id";
+    $result = readData($sql, "localhost", "stardunk_levels", "root", "");
+    return $result;
 }
 
-function updatedataOneProduct($colum, $value, $id){
+function updatedataOneProduct($colum, $value, $id)
+{
     $sql = "UPDATE products SET $colum='$value' WHERE product_id=$id";
-    $result = updateData($sql,"localhost","stardunk_levels","root","");
+    $result = updateData($sql, "localhost", "stardunk_levels", "root", "");
     return $result;
 }
 
 
-function deleteOneProduct($id){
+function deleteOneProduct($id)
+{
     $sql = "DELETE FROM products WHERE product_id=$id";
-    $result = deleteData($sql,"localhost","stardunk_levels","root","");
+    $result = deleteData($sql, "localhost", "stardunk_levels", "root", "");
     return $result;
 }
 
@@ -184,6 +188,21 @@ function connectDB($servername, $dbname, $username, $password)
     $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     return $con;
 }
+
+function createList($enteries)
+{
+    $html = '<ul>';
+    foreach ($enteries as $entery) {
+      
+        foreach($entery as  $value){
+          $html .="<li>" .$value. "</li>";    
+        }
+    }
+    $html .= '</ul>';
+    return $html;
+}
+
+
 
 //print_r(readData("SELECT * FROM products","localhost","stardunk_levels","root",""))
 

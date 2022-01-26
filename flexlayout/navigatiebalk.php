@@ -45,7 +45,7 @@ $navdrop = [
     'link3'=>'#',
   ]
   ];
-  echo '<div id="navigatiebalkboven">'.createList($navdrop, "nav_itemsboven", "dropdown-content").'</div>';
+  echo '<div id="navigatiebalkboven">'.createLinkList($navdrop, "nav_itemsboven", "dropdown-content").'</div>';
 
 
 
