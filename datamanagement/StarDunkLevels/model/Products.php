@@ -1,6 +1,7 @@
 <?php
 require_once('DataHandler.php');
-class Products{
+class Products
+{
 
     function __construct()
     {
@@ -9,9 +10,11 @@ class Products{
     }
     function __destruct()
     {
+
     }
     function createProduct()
     {
+
     }
     function readProduct()
     {
@@ -20,8 +23,10 @@ class Products{
     function listProduct()
     {
         $sql = "SELECT * FROM products";
-        $result = $this->datahandler->readData($sql);
-        return $result;
+        $result = $this->datahandler->readsData($sql);
+        //$result->setFetchMode(PDO::FETCH_ASSOC);
+        $res = $result->fetchAll();
+       return $res;
     }
     
     function updateProduct()
