@@ -1,5 +1,7 @@
 <?php
 include "../../flexlayout/model/display.php";
+require ("Data_Handler.php");
+$datahandler = new dataHandler("localhost", "stardunk_levels", "root", "", "mysql");
 //maak functie die formulie in de db plaatst
 
 function createProduct_les()
@@ -41,6 +43,86 @@ function createProduct_les()
         }
     }
 }
+function readAllProducts()
+{
+    $sql = "SELECT * FROM products";
+    $result = $datahandler->readData($sql);
+    return $result;
+}
+
+//maak functie die data kan wijzingen op basis van een formulier
+function updateProduct_les($id)
+{
+    var_dump($_REQUEST);
+    //checks if a form is  not sent
+    //check of de var sumbit niet bestaat en ga dan hier in
+    if (!isset($_POST['submit'])) {
+        //argument ontvangen
+        //gegevens op te halen om ze later in het formulier te werken
+        //argument verwerken in de query
+        //query uitvoeren
+        //resultaat ontvangen in een array
+        // de resultaten worden in de result geknald
+        $result = readOneProduct($id);
+
+        $product_id = $result[0]['product_id'];
+        $product_code = $result[0]['product_type_code'];
+        $supplier_id = $result[0]['supplier_id'];
+        $product_name = $result[0]['product_name'];
+        $product_price = $result[0]['product_price'];
+        $other_pr = $result[0]['other_product_details'];
+
+
+        //formulier samenstellen met de values uit de array
+        $html = "";
+        $html .= "<form action=\"db_handler.php\" method=\"POST\">";
+
+        $html .= "<label for=\"product_id\">product_id:</label><br>";
+        $html .= " <input type=\"text\" name=\"product_id\" value=\"$product_id\" readonly></input><br>";
+
+        $html .= "<label for=\"product_type_code\">Product_type_code:</label><br>";
+        $html .= " <input type=\"text\" name=\"product_type_code\" value=\"$product_code\"></input><br>";
+
+        $html .= "<label for=\"supplier_id\">supplier_id:</label><br>";
+        $html .= "<input type=\"text\" name=\"supplier_id\" value=\"$supplier_id\"></input><br>";
+
+        $html .= "<label for=\"product_name\">product_name:</label><br>";
+        $html .= "<input type=\"text\" name=\"product_name\" value=\"$product_name\"></input><br>";
+
+        $html .= "<label for=\"product_price\">product_price:</label><br>";
+        $html .= "<input type=\"text\" name=\"product_price\" value=\"$product_price\"></input><br>";
+
+        $html .= "<label for=\"other_product_details\">other product details:</label><br>";
+        $html .= "<input type=\"text\" name=\"other_product_details\" value=\"$other_pr\"></input><br><br>";
+
+        $html .= "<input type=\"submit\" name=\"submit\" value=\"update\" placeholder=\"Update Old Product\"></input><br>";
+        $html .= "</form>";
+
+        return $html;
+        //formulier tonen
+    } else {
+        //var_dump($_POST['submit']);
+        //echo "Hoi";
+        //als ja
+        //nemen de nieuwe values
+        $id = $_POST["product_id"];
+        $product_code = $_POST["product_type_code"];
+        $supplier_id = $_POST["supplier_id"];
+        $product_name = $_POST["product_name"];
+        $product_price = $_POST["product_price"];
+        $other_pr =  $_POST["other_product_details"];
+        //stellen update query samen
+        $sql = "UPDATE Products SET product_type_code = '$product_code', supplier_id = '$supplier_id', 
+    product_name = '$product_name', product_price = '$product_price', 
+    other_product_details = '$other_pr'  WHERE product_id = $id";
+        //uitvoeren query
+        readData($sql, 'localhost', 'stardunk_levels', 'root', '');
+
+        $sql2 = "SELECT * FROM Products WHERE product_id = $id";
+        $result = readData($sql2, 'localhost', 'stardunk_levels', 'root', '');
+        return $result;
+    }
+}
 function handlerRequest()
 {
     $html = "";
@@ -50,7 +132,24 @@ function handlerRequest()
 
     switch ($operation) {
         case 'create':
-            $html .= "<form><input type=\"text\">velt</form>";
+            $html .= "<form action=\"db_handler.php\" method=\"post\">";
+            $html .= "<label for=\"product_type_code\">Product type code:</label><br>";
+            $html .= "<input type=\"text\" id=\"product_type_code\" name=\"product_type_code\" value=\"\"><br>";
+
+            $html .= "<label for=\"supplier_id\">Supplier id:</label><br>";
+            $html .= "<input type=\"text\" id=\"supplier_id\" name=\"supplier_id\" value=\"\"><br>";
+
+            $html .= "<label for=\"product_name\">Product name:</label><br>";
+            $html .= "<input type=\"text\" id=\"product_name\" name=\"product_name\" value=\"\"><br>";
+
+            $html .= "<label for=\"product_price\">Product price:</label><br>";
+            $html .= "<input type=\"text\" id=\"product_price\" name=\"product_price\" value=\"\"><br>";
+
+            $html .= "<label for=\"other_product_details\">Other product details:</label><br>";
+            $html .= "<input type=\"text\" id=\"other_product_details\" name=\"other_product_details\" value=\"\"><br><br>";
+
+            $html .= "<input type=\"submit\" name=\"submit\"value=\"create\">";
+            $html .= "</form>";
             include "partial.php";
             return $html;
 
@@ -61,16 +160,18 @@ function handlerRequest()
             include "partial.php";
             return $html;
             break;
+
         case 'update':
-            $colum = $_GET['colum'];
-            $value = $_GET['value'];
+            //$colum = $_GET['colum'];
+            // $value = $_GET['value'];
             $id = $_GET['id'];
             $html .= "update case";
 
-            updatedataOneProduct($colum, $value, $id);
+            $html = updateProduct_les($id);
             include "partial.php";
             return $html;
             break;
+
         case 'delete':
             try {
                 $id = $_GET['id'];
@@ -99,103 +200,34 @@ function controlForm()
         $knop = $_POST["submit"];
 
         switch ($knop) {
+
             case 'create':
                 $msg = createProduct_les();
                 break;
-
-            default:
-                $msg = "Er is een fout opgetreden";
+                   
+                case 'update':
+                echo "test";
+                $id = $_POST["product_id"];
+                $msg = createTable(updateProduct_les($id),"");
                 break;
+
+                default:
+                $msg = "Er is een fout opgetreden";
+                 break;
+                }
+                return $msg;
         }
-        return $msg;
-    }
-}
-
-function  createData($sql, $servername, $databasename, $username, $password)
-{
-    $con = connectDB($servername, $databasename, $username, $password);
-    $stmt = $con->prepare($sql);
-    $result = $stmt->execute();
-    $id = $con->lastInsertId();
-    return $id;
-}
-
-function readData($sql, $servername, $databasename, $username, $password)
-{
-    $con = connectDB("$servername", "$databasename", "$username", "$password");
-
-    $stmt = $con->prepare($sql);
-
-    $stmt->execute();
-
-    $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-
-    $result = $stmt->fetchAll();
-
-    $con = null;
-    return $result;
-}
-function updateData($sql, $servername, $databasename, $username, $password)
-{
-    $con = connectDB("$servername", "$databasename", "$username", "$password");
-    $stmt = $con->prepare($sql);
-    $stmt->execute();
-    $con = null;
-}
-
-function deleteData($sql, $servername, $databasename, $username, $password)
-{
-    $con = connectDB("$servername", "$databasename", "$username", "$password");
-
-    $con->exec($sql);
-
-    $con = null;
-}
-
-function readAllProducts()
-{
-    $sql = "SELECT * FROM products";
-    $result = readData($sql, "localhost", "stardunk_levels", "root", "");
-    return $result;
-}
-
-function readOneProduct($id)
-{
-    $sql = "SELECT * FROM products WHERE product_id=$id";
-    $result = readData($sql, "localhost", "stardunk_levels", "root", "");
-    return $result;
-}
-
-function updatedataOneProduct($colum, $value, $id)
-{
-    $sql = "UPDATE products SET $colum='$value' WHERE product_id=$id";
-    $result = updateData($sql, "localhost", "stardunk_levels", "root", "");
-    return $result;
-}
+ }
 
 
-function deleteOneProduct($id)
-{
-    $sql = "DELETE FROM products WHERE product_id=$id";
-    $result = deleteData($sql, "localhost", "stardunk_levels", "root", "");
-    return $result;
-}
-
-
-function connectDB($servername, $dbname, $username, $password)
-{
-    $con = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-    $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    return $con;
-}
 
 function createList($enteries)
 {
     $html = '<ul>';
     foreach ($enteries as $entery) {
-      
-        foreach($entery as  $value){
-          $html .="<li>" .$value. "</li>";    
+
+        foreach ($entery as  $value) {
+            $html .= "<li>" . $value . "</li>";
         }
     }
     $html .= '</ul>';

@@ -1,5 +1,6 @@
 <?php
 include_once ('lvl1_db_functions.php');
+
 ?>
 <html>
 
@@ -20,7 +21,7 @@ include_once ('lvl1_db_functions.php');
     <h5>read</h5>
     <a class="button" href="./index.php?op=create">Create new product</a>
     <a class="button" href="./index.php?op=read&id=12">Read</a>
-    <a class="button" href="./index.php?op=update&colum=product_name&value=test123&id=17">Update</a>
+    <a class="button" href="./index.php?op=update&id=17">Update</a>
     <a class="button" href="./index.php?op=delete&id=58">Delete</a>
     <br>
     <br>
