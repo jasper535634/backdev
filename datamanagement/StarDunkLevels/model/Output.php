@@ -1,36 +1,56 @@
 <?php
-class Output{
+require_once('Products.php');
+
+class Output
+{
 
     public function __construct()
     {
-
+        $this->products = new Products();
     }
     public function __destruct()
     {
-        
     }
-    public function createTable($entries, $ftable){
-        $html ='<table class="' .$ftable. '">';
-        foreach ($entries as $entry) {
-            $html .="<tr>";
-    
-            foreach ($entry as $key => $val) {
-              // echo "createtable function debug result".$[1][0];
-                $html .="<td>" .$val. "</td>";
+    //wordt 2d array verwacht
+    public function createTable($entries, $ftable)
+    {
+        $tableheader = false;
+        $html = "";
+        $html .= '<table class="' . $ftable . '">';
+        foreach ($entries as $row) {
+            if ($tableheader == false) {
+                $html .= "<tr>";
+                foreach ($row as $key => $value) {
+                    $html .= "<th>{$key}</th>";
+                }
+                $html .= "<th>actions</th>";
+                $html .= "</tr>";
+                $tableheader = true;
             }
-            $html.="</tr>";
+            $html .= "<tr>";
+            foreach ($row as $key => $value) {
+                $html .= "<td data-title='{$key}'>{$value}</td>";
+            }
+            $html .= "<td><a href='index.php?op=read&id=" . $row['product_id'] . 
+            "'>Read</a><a href='index.php?op=update&id=" . $row['product_id'] . 
+            "'>Update</a><a href='index.php?op=delete&id=" . $row['product_id'] . 
+            "'onclick=\"return confirm('Are you sure you want to delete?');\">Delete</a></td>";
+            $html .= "</tr>";
         }
-        $html.= "</table>";
+        $html .= "</table>";
         return $html;
     }
-        
+    public function createlist($enteries){
+        $html = '<ul>';
+        foreach ($enteries as $entery) {
     
-
-
-
+            foreach ($entery as  $value) {
+                $html .= "<li>" . $value . "</li>";
+            }
+        }
+        $html .= '</ul>';
+        return $html;
+    }
 }
-
-
-
 
 ?>
