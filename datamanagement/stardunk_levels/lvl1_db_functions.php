@@ -175,7 +175,7 @@ function handlerRequest()
         case 'delete':
             try {
                 $id = $_GET['id'];
-                deleteOneProduct($id);
+                echo deleteOneProduct($id);
                 $html .= "product deleted";
             } catch (PDOException $e) {
                 echo "somting went wrong error:" . "<br>" . $e->getMessage();

@@ -42,17 +42,23 @@ switch ($op) {
          }
         break;
     case 'read':
-        $id = $_GET['id'];
-        $res = $products->readProduct($id);
+        $res = $products->readProduct($_REQUEST['id']);
         echo $output->createlist($res);
         break;
 
     case 'update':
-        
+        echo $products->collectUpdateproduct($_REQUEST['id']);
         break;
 
     case 'delete':
-        
+        try {
+        $products->collectDeleteproduct($_REQUEST['id']);
+        echo "<br>product deleted<br>";
+        echo "<a href='index.php'>back</a>";
+    } catch (PDOException $e) {
+        echo "somting went wrong error:" . "<br>" . $e->getMessage();
+    }
+    
         break;
 
     default:
