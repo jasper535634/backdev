@@ -63,7 +63,7 @@ if($time > $startTime && $time < $endTime) {
     $totalcost = $subtotal + ($minutesDiven * $highDriveCost);
 //   return $totalcost;
 }
-
+//heb ook het weekend deel gedaan 
 if(isweekend($dateAndTime) === true){
     return "<br> De prijs voor u taxi rit is " .$totalcost * 1.15." euro";
 }else{
