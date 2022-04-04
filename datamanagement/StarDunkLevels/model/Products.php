@@ -6,7 +6,6 @@ class Products
     function __construct()
     {
         $this->datahandler = new dataHandler( "localhost", "mysql", "stardunk_levels", "root", "", );
-        //$this->datahandler = new Output();
     }
     function __destruct()
     {
@@ -33,7 +32,7 @@ class Products
              product_type_code,
              supplier_id,
              product_name,
-             REPLACE(product_price, '.', ',')product_price,
+             CONCAT('€ ', REPLACE(product_price, '.', ','))product_price,
              other_product_details  
              FROM products 
              WHERE product_id=$lastid";
@@ -48,25 +47,29 @@ class Products
     }
     function readProduct($id)
     {
-    $sql = "SELECT product_id,product_type_code,supplier_id, product_name, REPLACE(product_price, '.', ',')product_price, other_product_details FROM products WHERE product_id=$id";
+    $sql = "SELECT product_id,product_type_code,supplier_id, product_name, CONCAT('€ ', REPLACE(product_price, '.', ','))product_price, other_product_details FROM products WHERE product_id=$id";
     $result = $this->datahandler->readsData($sql);
     $res = $result->fetchAll();
     return $res;  
     }
-    function listProduct()
+    function listProduct($p = 1)
     {
+        $item_per_page = 5;
+        $position =(($p - 1) * $item_per_page);
+
         $sql = "SELECT 
         product_id,
         product_type_code,
         supplier_id,
         product_name,
-        REPLACE(product_price, '.', ',')product_price,
+        CONCAT('€ ', REPLACE(product_price, '.', ','))product_price,
         other_product_details 
-        FROM products";
+        FROM products
+        LIMIT $position,$item_per_page";
         $result = $this->datahandler->readsData($sql);
-        //$result->setFetchMode(PDO::FETCH_ASSOC);
-        $res = $result->fetchAll();
-       return $res;
+        $pages = $this->datahandler->countPages('SELECT COUNT(*) FROM products');
+   
+       return array($result, $pages);
     }
     
     function updateProduct($colum, $value, $id)
@@ -104,7 +107,7 @@ class Products
             $product_code = $result[0]['product_type_code'];
             $supplier_id = $result[0]['supplier_id'];
             $product_name = $result[0]['product_name'];
-            $product_price = $result[0]['product_price'];
+            $product_price = trim($result[0]['product_price'],'€');
             $other_pr = $result[0]['other_product_details'];
 
             $html = "";
@@ -145,6 +148,19 @@ class Products
         $result = $this->datahandler->deleteData($sql);
         return $result;
            
+    }
+   function searchproduct($search)
+    {
+        $sql = "SELECT product_id, product_name, product_price, other_product_details FROM Products where product_name LIKE '%$search%' OR other_product_details LIKE '%$search%'";
+        $result = $this->datahandler->readsData($sql);
+        $res = $result->fetchAll();
+            if($result->rowCount() > 0){ 
+                $output = new output();
+                $html = $output->createTable($res,'search');
+            }else{
+                $html = "0 records found!";
+            }
+        return $html;
     }
 }
 

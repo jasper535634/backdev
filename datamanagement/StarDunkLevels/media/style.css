@@ -93,3 +93,27 @@
     background-color: #04AA6D;
     color: white;
   }  
+
+.search tr >:nth-child(1)  {
+  display: none;
+}
+a {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 5px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+form.serachform input[type=text] {
+  padding: 5px;
+  font-size: 17px;
+  border: 1px solid grey;
+  width:  30%;
+  background: #f1f1f1;
+}

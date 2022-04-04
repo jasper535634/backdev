@@ -56,5 +56,15 @@ class DataHandler{
 	public function lastInsertId(){  
 		return $this->dbh->lastInsertId();  
 	}
+	public function countPages($sql){
+		$item_per_page= 5;
+		$result = $this->dbh->query($sql);
+		$get_total_rows = $result->fetch();		
+		// ceil is een functie die een int of een fload naar boven afrond
+		$page = ceil($get_total_rows[0] / $item_per_page);
+		return $page;
+
+
+	}
 }
 ?>

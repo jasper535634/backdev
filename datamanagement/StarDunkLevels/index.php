@@ -4,11 +4,32 @@ require_once('header.php');
 <h2>TITLE HEADING</h2>
 <h5>Title description, Dec 7, 2017</h5>
 <a class="button" href="./index.php?op=create">Create new product</a>
+<br>
+<form class="searchform" action="index.php?op=search" method="POST">
+    <input type="text" name="searchterm">
+    <input class='searchbtn' type="submit" name="submit" value="search">
+</form>
+<br>
 <?php
 require_once('./model/Products.php');
 require_once('./model/Output.php');
 $products = new Products();
 $output = new Output();
+
+function collectReadPagedProducts($p = 1)
+{
+    global $products, $output;
+    // $res = $products->listProduct($_REQUEST['page']);
+    $res = $products->listProduct($p);
+
+    echo $output->createTable($res[0], "");
+    echo $output->createPageButton($res[1]);
+    echo "<br>";
+    echo "Showing page {$p} of all products";
+}
+
+
+
 
 
 $op = isset($_GET['op']) ? $_GET['op'] : '';
@@ -58,28 +79,22 @@ switch ($op) {
     } catch (PDOException $e) {
         echo "somting went wrong error:" . "<br>" . $e->getMessage();
     }
-    
         break;
 
-    default:
-    $res = $products->listProduct();
-    echo $output->createTable($res, "");
+    case 'search':
+        echo $products->searchproduct($_POST['searchterm']);
         break;
+
+    case'readpage':
+        collectReadPagedProducts($_REQUEST['page']);
+        break;
+    default:
+        collectReadPagedProducts();
+        break;
+        
 }
 
-?>
-<div class="fakeimg" style="height:200px;">Image</div>
-<p>Some text..</p>
-<p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
-<br>
 
-<br>
-<h2>TITLE HEADING</h2>
-<h5>Title description, Sep 2, 2017</h5>
-<div class="fakeimg" style="height:200px;">Image</div>
-<p>Some text..</p>
-<p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
-require_once('footer.php')
-<?php
+
 require_once('footer.php');
 ?>

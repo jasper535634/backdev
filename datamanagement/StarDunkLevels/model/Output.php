@@ -32,9 +32,9 @@ class Output
                 $html .= "<td data-title='{$key}'>{$value}</td>";
             }
             $html .= "<td><a href='index.php?op=read&id=" . $row['product_id'] . 
-            "'>Read</a><a href='index.php?op=update&id=" . $row['product_id'] . 
-            "'>Update</a><a href='index.php?op=delete&id=" . $row['product_id'] . 
-            "'onclick=\"return confirm('Are you sure you want to delete?');\">Delete</a></td>";
+            "'><i class=\"fa-brands fa-readme\"></i>Read</a><a href='index.php?op=update&id=" . $row['product_id'] . 
+            "'><i class=\"fa-solid fa-pencil\"></i>Update</a><a href='index.php?op=delete&id=" . $row['product_id'] . 
+            "'onclick=\"return confirm('Are you sure you want to delete?');\"><i class=\"fa-solid fa-trash-can\"></i>Delete</a></td>";
             $html .= "</tr>";
         }
         $html .= "</table>";
@@ -49,6 +49,14 @@ class Output
             }
         }
         $html .= '</ul>';
+        return $html;
+    }
+    public function createPageButton($pages){
+        $html="";
+        for($i = 1; $i <= $pages; $i++){
+            $html.="<a href=index.php?op=readpage&page=" .$i. ">" .$i. "</a>";
+            
+        }
         return $html;
     }
 }
