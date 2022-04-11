@@ -12,20 +12,25 @@
 
 
 <?php
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST'){
    echo calclateTaxiPrice();
 };
 
 function isweekend($date){
     $date = strtotime($date);
-    $startWeekend = strtotime("next friday 22:00:00");
-    $endWeekend = strtotime("next monday 07:00:00");
-    echo $date;
-    if($date > $startWeekend && $date < $endWeekend) {
-        return true;
-    } else {
-        return false;
-    }
+    $dayNum = date("N",$date);
+    var_dump($dayNum);
+    // $startWeekend = 5;
+    // $endWeekend = 7;
+    // echo"<br>";
+    // echo $dayNum;
+    // echo"<br>";
+    // if($dayNum >= $startWeekend && $dayNum <= $endWeekend) {
+    //     return "het is weekend";
+    // } else {
+    //     return "het is geen weekend";
+    // }
 }
 
 function calclateTaxiPrice(){
@@ -33,24 +38,35 @@ function calclateTaxiPrice(){
 $dateAndTime = $_REQUEST['date'];
 $totalkm = $_REQUEST['km'];
 $kmtarief = 1;
+$taxiSpeed = 70;
 $minDriveCost = 0.25;
 $highDriveCost = 0.45;
+$weekendMultiplier = 1.15;
+$minInHour = 60;
 
 // var_dump(isweekend($dateAndTime));
 
 //form velden bewerken
-$splitDateAndTime = preg_split("/T/", $dateAndTime);
-$date= $splitDateAndTime[0];
+$splitDateAndTime = explode("T", $dateAndTime);
+$date = $splitDateAndTime[0];
 $time = strtotime($splitDateAndTime[1]);
+$timetest=$splitDateAndTime[1];
+
+if ($timetest > "08:00" && $timetest < "18:00"){
+    echo "0.25 ".$timetest;
+}else{
+    echo "0.45 ".$timetest;
+}
+
 
 $startTime = strtotime('08:00:00');
-$endTime = strtotime('16:00:00');
+$endTime = strtotime('18:00:00');
 // var_dump($startTime);
 // var_dump($endTime);
 
 // subtotal = km * kmtarief
 $subtotal = $totalkm * $kmtarief;
-$minutesDiven = ($totalkm / 60) * 60;
+$minutesDiven = ($totalkm / $taxiSpeed) * $minInHour;
 
 // var_dump($minutesDiven);
 // controleer of de ingevoerde tijd tussen 8-18 valt
@@ -63,9 +79,10 @@ if($time > $startTime && $time < $endTime) {
     $totalcost = $subtotal + ($minutesDiven * $highDriveCost);
 //   return $totalcost;
 }
+echo isweekend($date);
 //heb ook het weekend deel gedaan 
-if(isweekend($dateAndTime) === true){
-    return "<br> De prijs voor u taxi rit is " .$totalcost * 1.15." euro";
+if(isweekend($dateAndTime)){
+    return "<br> De prijs voor u taxi rit is " .($totalcost * $weekendMultiplier)." euro";
 }else{
     return "<br> De prijs voor u taxi rit is " .$totalcost. " euro";
 }

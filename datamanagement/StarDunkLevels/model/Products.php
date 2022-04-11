@@ -86,7 +86,7 @@ class Products
             $product_code = $_REQUEST["product_type_code"];
             $supplier_id = $_REQUEST["supplier_id"];
             $product_name = $_REQUEST["product_name"];
-            $product_price = $_REQUEST["product_price"];
+            $product_price = trim(str_replace(",",".",$_REQUEST["product_price"]),'€');
             $other_pr =  $_REQUEST["other_product_details"];
 
             $sql = "UPDATE Products SET product_type_code = '$product_code',
@@ -107,7 +107,7 @@ class Products
             $product_code = $result[0]['product_type_code'];
             $supplier_id = $result[0]['supplier_id'];
             $product_name = $result[0]['product_name'];
-            $product_price = trim($result[0]['product_price'],'€');
+            $product_price = $result[0]['product_price'];
             $other_pr = $result[0]['other_product_details'];
 
             $html = "";
