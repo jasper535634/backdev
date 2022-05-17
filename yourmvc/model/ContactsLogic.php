@@ -27,8 +27,6 @@ class ContactsLogic{
             $res = $result->fetchAll();
             //laat weten of het gelukt is en laat het  resultaat zien
             return $res;
-
-
         }
 
     }
@@ -52,15 +50,17 @@ class ContactsLogic{
         }
     }
 
-    public function opdateContact()
+    public function updateContact($id, $name, $phone, $email, $location)
     {
-
+        $sql = "UPDATE contacts SET name= '$name', phone= '$phone', email = '$email', location= '$location' WHERE id=$id";
+        $result = $this->DataHandler->updateData($sql);
+        return	$result;
     }
 
     public function deleteContact($id)
     {
         $sql = "DELETE  FROM contacts WHERE id=".$id;
-        $result = $this->datahandler->deleteData($sql);
+        $result = $this->DataHandler->deleteData($sql);
         return $result;
     }
 }

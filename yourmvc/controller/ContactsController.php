@@ -23,13 +23,11 @@ class ContactsController
                     break;
             
                 case 'update':
-                   echo "update";
                     $this->collectUpdateContact($_REQUEST['id']);
                     break;
             
                 case 'delete':
-                   echo "delete";
-                   
+                   $this->collectDeleteContact($_REQUEST['id']);
                     break;
             
                 case 'search':
@@ -50,12 +48,18 @@ class ContactsController
     }
     public function collectCreateContact()
     {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST'){
+        if (isset($_REQUEST['submit'])){
             $res=$this->ContactsLogic->createContact();
             $contact=$this->Output->createTable($res, "");
             include "view/read.php";
         }else{
-            include "view/create.php";
+            $id         = isset($_REQUEST['id'])? $_REQUEST['id'] : null;
+            $name       = isset($_REQUEST['name'])? $_REQUEST['name']: null;
+            $phone      = isset($_REQUEST['phone'])? $_REQUEST['phone']: null;
+            $email      = isset($_REQUEST['email']) ? $_REQUEST['email']: null;
+            $location   = isset($_REQUEST['location'])? $_REQUEST['location']: null;
+
+            include "view/formcontact.php";
         }
     }
     public function collectReadContact($id)
@@ -74,11 +78,34 @@ class ContactsController
     }
     public function collectUpdateContact($id)
     {
+        $id         = isset($_REQUEST['id'])? $_REQUEST['id'] : null;
+        $name       = isset($_REQUEST['name'])? $_REQUEST['name']: null;
+        $phone      = isset($_REQUEST['phone'])? $_REQUEST['phone']: null;
+        $email      = isset($_REQUEST['email']) ? $_REQUEST['email']: null;
+        $location   = isset($_REQUEST['location'])? $_REQUEST['location']: null;
+
+        if (isset($_REQUEST['submit'])){
+
+            $contact = $this->ContactsLogic->updateContact($id, $name, $phone, $email, $location);
+
+            $this->collectReadContact($id);
+
+        }
+
+        $contacts = $this->ContactsLogic->readContact($id);
+        $res = $contacts->fetch(PDO::FETCH_NUM);
+        [$id, $name, $phone, $email, $location] = $res;
+
+        $msg ="Edit this contact";
+        $operation ="update&id=$id";
+        include 'view/formcontact.php';
         
     }
     public function collectDeleteContact($id)
     {
-        $this->ContactsLogic->deleteContact($id);
+        $deleted = $this->ContactsLogic->deleteContact($id);
+
+        include 'view/delete.php';
     }
 }
 
