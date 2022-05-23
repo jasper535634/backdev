@@ -11,6 +11,14 @@ class contentsLogic{
     {
         
     }
+    public function readContents(){
+        try {
+            $sql = "SELECT *  FROM contents WHERE id=1";
+            return $this->DataHandler->readsData($sql);
+        }catch(Exception $e){
+            throw $e;
+        }
+    }
 
 
 

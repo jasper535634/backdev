@@ -1,12 +1,14 @@
 <?php
 require_once('model/ContactsLogic.php');
 require_once('model/Output.php');
+require_once('model/contentsLogic.php');
 
 class ContactsController
 {
     public function __construct() {
         $this->ContactsLogic = new ContactsLogic();
         $this->Output = new Output();
+        $this->contentsLogic = new contentsLogic();
         
     }
     public function __destruct(){}
@@ -36,7 +38,7 @@ class ContactsController
                 
                 case'choice':
                     $msg = "this is the choice page";
-                    include "./view/choice.php";
+                    $this->collectReadContents();
                     break;
                     
                 case'readpage':
@@ -120,6 +122,14 @@ class ContactsController
 
         include 'view/read.php';
     }
+    
+    public function collectReadContents()
+    {
+        $res = $this->contentsLogic->readContents();
+        $content=$this->Output->createlist($res);
+        include 'view/choice.php';
+    }
+
 }
 
 
