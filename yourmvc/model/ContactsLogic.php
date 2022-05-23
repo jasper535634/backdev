@@ -5,6 +5,7 @@ class ContactsLogic{
     public function __construct()
     {
         $this->DataHandler = new DataHandler("localhost","mysql","mvc","root","");
+        $this->Output = new output();
     }
     public function __destruct()
     {
@@ -63,5 +64,18 @@ class ContactsLogic{
         $result = $this->DataHandler->deleteData($sql);
         return $result;
     }
+    public function searchContact($search)
+    {
+        $sql = "SELECT * FROM contacts where id LIKE '%$search%' OR name LIKE '%$search%' OR phone LIKE '%$search%' OR email LIKE '%$search%' OR location LIKE '%$search%'";
+        $result = $this->DataHandler->readsData($sql);
+        $res = $result->fetchAll();
+            if($result->rowCount() > 0){ 
+                $contact = $this->Output->createTable($res,'search');
+            }else{
+                $contact = "0 records found!";
+            }
+        return $contact;
+    }
+
 }
 ?>

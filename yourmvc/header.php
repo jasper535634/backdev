@@ -17,7 +17,7 @@
 <!-- Navigation Bar -->
 <div class="navbar">
   <a href="index.php">Home</a>
-  <a href="#">Link</a>
+  <a href="index.php?op=choice">choice</a>
   <a href="#">Link</a>
   <a href="#">Link</a>
 </div>
@@ -36,3 +36,4 @@
     <div class="fakeimg" style="height:60px;">Image</div>
   </div>
   <div class="main">
+  <?= isset($msg) ? "<div class='full-button'>".$msg."</div>" :null; ?>

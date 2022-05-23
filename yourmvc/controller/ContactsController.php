@@ -31,9 +31,14 @@ class ContactsController
                     break;
             
                 case 'search':
-                    echo "search";
+                    $this->collectSearchContact($_REQUEST['searchterm']);
                     break;
-            
+                
+                case'choice':
+                    $msg = "this is the choice page";
+                    include "./view/choice.php";
+                    break;
+                    
                 case'readpage':
                     echo "readpage";
                     break;
@@ -48,6 +53,7 @@ class ContactsController
     }
     public function collectCreateContact()
     {
+
         if (isset($_REQUEST['submit'])){
             $res=$this->ContactsLogic->createContact();
             $contact=$this->Output->createTable($res, "");
@@ -58,7 +64,8 @@ class ContactsController
             $phone      = isset($_REQUEST['phone'])? $_REQUEST['phone']: null;
             $email      = isset($_REQUEST['email']) ? $_REQUEST['email']: null;
             $location   = isset($_REQUEST['location'])? $_REQUEST['location']: null;
-
+            $operation = "create";
+            $msg = "this is the create page";
             include "view/formcontact.php";
         }
     }
@@ -106,6 +113,12 @@ class ContactsController
         $deleted = $this->ContactsLogic->deleteContact($id);
 
         include 'view/delete.php';
+    }
+    public function collectSearchContact($search)
+    {
+        $contact= $this->ContactsLogic->searchContact($search);
+
+        include 'view/read.php';
     }
 }
 
