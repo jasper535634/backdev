@@ -1,5 +1,5 @@
 <?php
-require_once 'model/DataHandler.php';
+require_once 'model/dataHandler.php';
 
 class ContactsLogic{
     public function __construct()

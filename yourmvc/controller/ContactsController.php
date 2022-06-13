@@ -1,6 +1,6 @@
 <?php
-require_once('model/ContactsLogic.php');
-require_once('model/Output.php');
+require_once('model/contactsLogic.php');
+require_once('model/output.php');
 require_once('model/contentsLogic.php');
 
 class ContactsController
@@ -34,11 +34,6 @@ class ContactsController
             
                 case 'search':
                     $this->collectSearchContact($_REQUEST['searchterm']);
-                    break;
-                
-                case'choice':
-                    $msg = "this is the choice page";
-                    $this->collectReadContents();
                     break;
                     
                 case'readpage':
@@ -121,13 +116,6 @@ class ContactsController
         $contact= $this->ContactsLogic->searchContact($search);
 
         include 'view/read.php';
-    }
-    
-    public function collectReadContents()
-    {
-        $res = $this->contentsLogic->readContents();
-        $content=$this->Output->createlist($res);
-        include 'view/choice.php';
     }
 
 }

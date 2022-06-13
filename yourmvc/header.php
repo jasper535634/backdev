@@ -4,8 +4,14 @@
 <title>Page Title</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
 <link rel="stylesheet" href="./view/assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
+
 </head>
 <body>
 <!-- Header -->
@@ -17,7 +23,7 @@
 <!-- Navigation Bar -->
 <div class="navbar">
   <a href="index.php">Home</a>
-  <a href="index.php?op=choice">choice</a>
+  <a href="index.php?controller=contents&op=readallpost">post 1</a>
   <a href="#">Link</a>
   <a href="#">Link</a>
 </div>
