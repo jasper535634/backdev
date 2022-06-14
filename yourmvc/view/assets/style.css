@@ -117,7 +117,7 @@ form.serachform input[type=text] {
   width:  30%;
   background: #f1f1f1;
 }
-input[type=text], select {
+input[type=text], select, textarea {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;

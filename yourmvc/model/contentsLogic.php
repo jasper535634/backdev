@@ -56,6 +56,10 @@ class contentsLogic{
         }
         return $container;  
         }
+        public function createContent(){
+            
+        }
 }
+
 
 ?>

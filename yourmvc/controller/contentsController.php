@@ -30,7 +30,11 @@ class ContentsController
                 case'readpage':
                     echo "readpage";
                     break;
+                case'createcontent':
+                    $this->collectCreateContent();
+                    break;
                 default:
+                $this->collectReadAllContents();
                     break;
                     
             }
@@ -52,12 +56,19 @@ class ContentsController
     }
     public function collectReadAllContents()
     {
+        // var_dump($_REQUEST);
         $result = $this->contentsLogic->readAllContents();
         $content = $this->Output->createTable($result,"","readpost","contents");
         include 'view/choice.php';
     }
 
+    public function collectCreateContent(){
+        // $this->contentLogic->createContent();
+        include 'view/createcontent.php';
+    }
+
 }
+
 
 
 ?>
